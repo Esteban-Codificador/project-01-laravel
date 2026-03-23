@@ -1,11 +1,163 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+/* ============================================
+   PORTFOLIO — CSS Variables & Base Styles
+   Fuente: Outfit (cargada via <link> en el HTML)
+   Cambia las variables para personalizar todo.
+   ============================================ */
 
+/* ---------- Custom Tailwind Theme ---------- */
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-outfit: "Outfit", sans-serif;
+
+    /* Colores principales */
+    --color-primary-50: #eef5ff;
+    --color-primary-100: #d9e8ff;
+    --color-primary-200: #bcd7ff;
+    --color-primary-300: #8ebfff;
+    --color-primary-400: #599cff;
+    --color-primary-500: #3375fc;
+    --color-primary-600: #1a54f1;
+    --color-primary-700: #1540de;
+    --color-primary-800: #1734b4;
+    --color-primary-900: #19308d;
+
+    /* Neutrales */
+    --color-surface-50: #f8f9fb;
+    --color-surface-100: #f0f2f5;
+    --color-surface-200: #e4e7ec;
+    --color-surface-300: #cdd3db;
+    --color-surface-400: #98a2b3;
+    --color-surface-500: #667085;
+    --color-surface-600: #475467;
+    --color-surface-700: #344054;
+    --color-surface-800: #1d2939;
+    --color-surface-900: #101828;
+    --color-surface-950: #0a0f1a;
+
+    /* Acentos */
+    --color-accent-green: #10b981;
+    --color-accent-amber: #f59e0b;
+    --color-accent-rose: #f43f5e;
+    --color-accent-violet: #8b5cf6;
+}
+
+/* ---------- CSS Custom Properties (fáciles de cambiar) ---------- */
+:root {
+    --portfolio-bg: var(--color-surface-950);
+    --portfolio-bg-card: var(--color-surface-900);
+    --portfolio-bg-card-alt: var(--color-surface-800);
+    --portfolio-text: var(--color-surface-50);
+    --portfolio-text-muted: var(--color-surface-400);
+    --portfolio-border: var(--color-surface-700);
+    --portfolio-accent: var(--color-primary-500);
+    --portfolio-accent-hover: var(--color-primary-400);
+    --portfolio-radius: 0.75rem;
+    --portfolio-radius-lg: 1.25rem;
+    --portfolio-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    --portfolio-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Todo dentro de @layer base para no pelear con Tailwind ---------- */
+@layer base {
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        font-family: var(--font-outfit);
+        background-color: var(--portfolio-bg);
+        color: var(--portfolio-text);
+        line-height: 1.6;
+        min-height: 100vh;
+    }
+
+    a {
+        color: var(--portfolio-accent);
+        text-decoration: none;
+        transition: color var(--portfolio-transition);
+    }
+
+    a:hover {
+        color: var(--portfolio-accent-hover);
+    }
+
+    ::selection {
+        background-color: var(--color-primary-600);
+        color: white;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--portfolio-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-surface-700);
+        border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-surface-500);
+    }
+}
+
+/* ---------- Animaciones (en utilities para que se puedan usar como clases) ---------- */
+@layer utilities {
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.6s ease-out both;
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.5s ease-out both;
+    }
+
+    .delay-100 {
+        animation-delay: 0.1s;
+    }
+    .delay-200 {
+        animation-delay: 0.2s;
+    }
+    .delay-300 {
+        animation-delay: 0.3s;
+    }
+    .delay-400 {
+        animation-delay: 0.4s;
+    }
+    .delay-500 {
+        animation-delay: 0.5s;
+    }
 }
